@@ -12,6 +12,7 @@ $(document).ready(function() {
               lati = data2.lat;
               long = data2.lon;
                // $("#data").html("latitude: " + lati + "<br>longitude: " + long);
+               //git
                var api = 'http://api.openweathermap.org/data/2.5/weather?lat='+lati+'&lon='+long+'&&APPID=f44745b3b949068be733eb938051eed4';
 
                   $.getJSON(api, function(data) {
