@@ -1,5 +1,4 @@
 
-
 $(document).ready(function() {
       var lati;
       var long;
@@ -47,6 +46,14 @@ $(document).ready(function() {
                 });
       });              
   });
+
+
+
+
+
+
+
+
 
 // (function() {
 // var d3 = Plotly.d3;
