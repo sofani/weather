@@ -1,28 +1,57 @@
 
 
 $(document).ready(function() {
-      var long;
       var lati;
+      var long;
+  
+      var fTemp;
+      var cTemp;
+      var temSwap= true;
 
-      if (navigator.geolocation) {
-            
-            navigator.geolocation.getCurrentPosition(function(position) {
-            	long =  position.coords.longitude;
-            	lati =  position.coords.latitude;
-                  $("#data").html("latitude: " + lati + "<br>longitude: " + long);
-                  var api = 'http://api.openweathermap.org/data/2.5/weather?lat='+lati+'&lon='+long+'&&APPID=f44745b3b949068be733eb938051eed4';
+      $.getJSON("http://ip-api.com/json" , function(data2) {
+              lati = data2.lat;
+              long = data2.lon;
+               // $("#data").html("latitude: " + lati + "<br>longitude: " + long);
+               var api = 'http://api.openweathermap.org/data/2.5/weather?lat='+lati+'&lon='+long+'&&APPID=f44745b3b949068be733eb938051eed4';
 
                   $.getJSON(api, function(data) {
                        var weatherType = data.weather[0].description;
                        var kelvin = data.main.temp;
                        var windspeed = data.wind.speed;
                        var city = data.name;
-                      console.log(weatherType);
-                       console.log(api);
+                       fTemp = ((kelvin * 9 / 5) - 459.67).toFixed(2);
+                       cTemp  = (kelvin - 273.15).toFixed(2);
+                       windspeed = (2.237 * windspeed).toFixed(1);
+                       if (fTemp > 80) {
+                         $('body').css('background-color','red');
+                       } else if (fTemp < 80 && fTemp > 70) {
+                          $('body').css('background-color', 'blue');
+                       } else if (fTemp < 70 && fTemp > 60) {
+                          $('body').css('background-color','#2F4F4F');
+                       }
+                       $(".city").html(city);
+                       $(".weatherType").html(weatherType);
+                       $(".windspeed").html("Wind Speed " + windspeed + " MPH");
+                       $(".messageFara").html( fTemp + " (°F)");
+                       $(".messageFara").click(function() {
+                             if (temSwap === false) {
+                               $(".messageFara").html(cTemp + " (°C)");
+                               temSwap = true;
+                             } else {
+                                  $(".messageFara").html(fTemp + " (°F)");
+                                  temSwap = false;
+                             }
+                      });
+
+                       
+
+
+
+
                   });
-            });
-      } 
- });
+      });              
+  });
+
 // (function() {
 // var d3 = Plotly.d3;
 
