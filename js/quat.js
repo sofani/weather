@@ -15,7 +15,7 @@ $(document).ready(function() {
                //git
                var api = 'http://api.openweathermap.org/data/2.5/weather?lat='+lati+'&lon='+long+'&&APPID=f44745b3b949068be733eb938051eed4';
 
-                  $.getJSON(api, function(data) {
+               $.getJSON(api, function(data) {
                        var weatherType = data.weather[0].description;
                        var kelvin = data.main.temp;
                        var windspeed = data.wind.speed;
@@ -43,11 +43,6 @@ $(document).ready(function() {
                                   temSwap = false;
                              }
                       });
-
-                       
-
-
-
 
                   });
       });              
